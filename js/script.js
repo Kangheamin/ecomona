@@ -1,17 +1,49 @@
 $(document).ready(function(){
     /* 이미지 슬라이드 */
-    
+    $("#main").hover(function(){ //진입시
+        $(this).addClass("hover");
+    }, function(){
+        $(this).removeClass("hover");
+    })
+
+
     $("#main .slider ul li").eq(1).addClass("active");
     setInterval(() => {
-         var $first = $("#main ul li").first();
+         var $hover = $("#main").hasClass("hover");
+
+         if($hover){
+            //아무것도 하지마
+         }else{
+            var $first = $("#main ul li").first();
             $("#main ul").stop().animate({"margin-left":"-200%"}, 500, function(){
                 $("#main ul").append($first).css("margin-left", "-100%");
                 $("#main .slider ul li").removeClass("active");
                 $("#main .slider ul li").eq(1).addClass("active");
             });
-            
+         }
     }, 3000);
-    
+
+    //#4. 화살표 기능 부여 
+    $("#main .slider .next").click(function(){
+        var $first = $("#main ul li").first();
+            $("#main ul").stop().animate({"margin-left":"-200%"}, 500, function(){
+                $("#main ul").append($first).css("margin-left", "-100%");
+                $("#main .slider ul li").removeClass("active");
+                $("#main .slider ul li").eq(1).addClass("active");
+                
+            });
+            return false;
+    });
+
+    $("#main .slider .prev").click(function(){
+        var $last = $("#main ul li").last();
+            $("#main ul").stop().animate({"margin-left":"0%"}, 500, function(){
+                $("#main ul").prepend($last).css("margin-left", "-100%");
+                $("#main .slider ul li").removeClass("active");
+                $("#main .slider ul li").eq(1).addClass("active");
+            });
+            return false;
+    });
 
     $(" .menu > ul > li").hover(function(){
         $(this).find("ul").stop().slideDown();
@@ -45,12 +77,14 @@ $(document).ready(function(){
     contents.innerHTML = product_case;
 
     let product_insta = [
-        ["product_07.png"],
         ["product_08.png"],
         ["product_09.png"],
         ["product_10.png"],
         ["product_11.png"],
         ["product_12.png"],
+        ["product_13.png"],
+        ["product_14.png"],
+        ["product_15.png"],
     ];
 
     let insta_case = ``;
